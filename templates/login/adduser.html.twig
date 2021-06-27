@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			{% for message in app.flashes('notice') %}
+				<div class="flash-notice">
+					{{ message }}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	<h3>{{ title }}</h3>
+	{{ form_start(form) }}
+		<div class="row">
+			<div class="col-md-6">
+				{{ form_label(form.login) }}
+				{{ form_errors(form.login) }}
+			</div>
+			<div class="col-md-6">
+				{{ form_widget(form.login, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				{{ form_label(form.username) }}
+				{{ form_errors(form.username) }}
+			</div>
+			<div class="col-md-6">
+				{{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				{{ form_label(form.user_type) }}
+				{{ form_errors(form.user_type) }}
+			</div>
+			<div class="col-md-6">
+				{{ form_widget(form.user_type, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				{{ form_label(form.password) }}
+				{{ form_errors(form.password) }}
+			</div>
+			<div class="col-md-6">
+				{{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				{{ form_label(form.pass_text) }}
+				{{ form_errors(form.pass_text) }}
+			</div>
+			<div class="col-md-6">
+				{{ form_widget(form.pass_text, {'attr': {'class': 'form-control'}}) }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+				{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+			</div>
+			<div class="col-md-10">
+				<a href="/" class="btn btn-secondary">Вернуться на главную</a>
+			</div>
+		</div>
+	{{ form_end(form) }}
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#register_form_login").val("");
+		$("#register_form_username").val("");
+		$("#register_form_password").val("");
+		$("#register_form_pass_text").val("");
+	});
+</script>
+{% endblock %}

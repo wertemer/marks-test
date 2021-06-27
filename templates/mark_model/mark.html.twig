@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<div class="container">
+<div class="row">
+	<div class="col-md-3"><a href="/" class="btn btn-primary">На главную</a></div>
+	<div class="col-md-3"></div>
+	<div class="col-md-3"></div>
+	<div class="col-md-3">
+		{% if login  %}
+			Логин: {{ login }}<br>{{ role }}
+			<a href="/login/logout" class="btn btn-secondary">Выйти</a><br>
+			<a href="/mark/model" class="btn btn-primary">Управление</a><br>
+		{% endif %}
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		{% for message in app.flashes('notice') %}
+			<div class="flash-notice">
+				{{ message }}
+			</div>
+		{% endfor %}
+	</div>
+</div>
+<h3> {{ title }} </h3>
+{{ form_start(addmark) }}
+	<div class="row">
+		<div class="col-md-6">
+			{{ form_label(addmark.mark_name) }}<br>
+			{{ form_errors(addmark.mark_name) }}<br>
+		</div>
+		<div class="col-md-6">
+			{{ form_widget(addmark.mark_name, {'attr': {'class': 'form-control'}}) }}<br>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			{{ form_widget(addmark.save, {'attr': {'class': 'btn btn-primary'}}) }}<br>
+		</div>
+	</div>
+{{ form_end(addmark) }}
+</div>
+{% endblock %}

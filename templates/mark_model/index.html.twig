@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+	<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			{% for message in app.flashes('notice') %}
+				<div class="flash-notice">
+					{{ message }}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+		<div class="row">
+			<div class="col-md-3"><a href="/" class="btn btn-primary">На главную</a></div>
+			<div class="col-md-3"></div>
+			<div class="col-md-3"></div>
+			<div class="col-md-3">
+				{% if login  %}
+					Логин: {{ login }}<br>{{ role }}
+					<a href="/login/logout" class="btn btn-secondary">Выйти</a><br>
+					<a href="/mark/model" class="btn btn-primary">Управление</a><br>
+				{% endif %}
+			</div>
+		</div>
+		<div class="row">
+		<h1>{{ title }} </h1>
+			<div class="col-md-12">
+				{% if role!=null and role == 'Администратор' %}
+					<a href="/mark/model/addmodel" class="btn btn-primary">Добавить модель</a>
+					<a href="/mark/model/addmark" class="btn btn-primary">Добавить марку</a>
+				{% endif %}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-3"><strong>МАРКА</strong></div>
+			<div class="col-md-3"><strong>МОДЕЛЬ</strong></div>
+			<div class="col-md-3"><strong>Положение руля</strong></div>
+			<div class="col-md-3"></div>
+		</div>
+		{% for model in models %}
+			<div class="row">
+				<div class="col-md-3">
+					{% if model.fMark %}
+						{{ model.fMark.name }}
+					{% endif %}
+				</div>
+				<div class="col-md-3">{{ model.name }}</div>
+				<div class="col-md-3">
+					{% if model.getIsLeftDrive() %}
+						Левый руль
+					{% else %}
+						Правый руль
+					{% endif %}
+				</div>
+				<div class="col-md-3">
+					{% if role!=null and (role == 'Менеджер' or role == 'Администратор') %}
+						<a href="/mark/model/editmodel?model_id={{ model.id }}" class="btn btn-secondary">Изменить</a>
+					{% endif %}
+
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

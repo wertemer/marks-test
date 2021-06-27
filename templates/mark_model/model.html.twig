@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+<div class="row">
+	<div class="col-md-3"><a href="/" class="btn btn-primary">На главную</a></div>
+	<div class="col-md-3"></div>
+	<div class="col-md-3"></div>
+	<div class="col-md-3">
+		{% if login  %}
+			Логин: {{ login }}<br>{{ role }}
+			<a href="/login/logout" class="btn btn-secondary">Выйти</a><br>
+			<a href="/mark/model" class="btn btn-primary">Управление</a><br>
+		{% endif %}
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		{% for message in app.flashes('notice') %}
+			<div class="flash-notice">
+				{{ message }}
+			</div>
+		{% endfor %}
+	</div>
+</div>
+<h3>{{ title }} </h3>
+{{ form_start(newmodel) }}
+	<div class="row">
+		<div class="col-md-6">
+			{{ form_label(newmodel.mark_name) }}<br>
+			{{ form_errors(newmodel.mark_name) }}<br>
+		</div>
+		<div class="col-md-6">
+				{{ form_widget(newmodel.mark_name, {'attr': {'class': 'form-control' }}) }}<br>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			{{ form_label(newmodel.model_name) }}<br>
+			{{ form_errors(newmodel.model_name) }}<br>
+		</div>
+		<div class="col-md-6">
+			{% if model is not null %}
+				{{ form_widget(newmodel.model_name, {'attr': {'class': 'form-control', 'value':model }}) }}<br>
+			{% else %}
+				{{ form_widget(newmodel.model_name, {'attr': {'class': 'form-control' }}) }}<br>
+			{% endif %}
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			{{ form_label(newmodel.typerul) }}<br>
+			{{ form_errors(newmodel.typerul) }}<br>
+		</div>
+		<div class="col-md-6">
+				{{ form_widget(newmodel.typerul, {'attr': {'class': 'form-control' }}) }}<br>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			{{ form_widget(newmodel.save, {'attr': {'class': 'btn btn-primary'}}) }}<br>
+		</div>
+	</div>
+</div>
+{{ form_end(newmodel) }}
+<script type="text/javascript">
+$(document).ready(function() {
+
+		var isleft="{{ isLeft }}";
+		var editable={{ editable }};
+		if(editable!=0){
+			$("#model_form_mark_name option[value={{ mark }}]").prop('selected', true);
+		}
+		if(isleft=="" || isleft!=null){
+			$("#model_form_typerul option[value=0]").prop('selected', true);
+		} else {
+			$("#model_form_typerul option[value=1]").prop('selected', true);
+		}
+
+});
+</script>
+{% endblock %}

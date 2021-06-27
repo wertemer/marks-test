@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Entity\Models" table="Models">
+    <indexes>
+      <index name="f_mark" columns="f_mark"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+    </id>
+    <field name="name" type="string" column="name" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="isLeftDrive" type="boolean" column="is_left_drive" nullable="true">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <many-to-one field="fMark" target-entity="Marks" fetch="LAZY">
+      <join-columns>
+        <join-column name="f_mark" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

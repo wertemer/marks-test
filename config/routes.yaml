@@ -1,0 +1,24 @@
+index:
+    path: /mark/model/index
+    controller: App\Controller\MarkModelController::index
+addmodel:
+   path: /mark/model/addmodel
+   controller: App\Controller\MarkModelController::addmodel
+addmark:
+    path: /mark/model/addmark
+    controller: App\Controller\MarkModelController::addmark
+editmodel:
+    path: /mark/model/editmodel
+    controller: App\Controller\MarkModelController::editmodel
+view:
+    path: /
+    controller: App\Controller\ViewController::index
+logout:
+    path: /login/logout
+    controller: App\Controller\LoginController::logout
+login:
+    path: /login
+    controller: App\Controller\LoginController::index
+adduser:
+    path: /login/adduser
+    controller: App\Controller\LoginController::adduser

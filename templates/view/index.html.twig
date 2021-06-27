@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ controller_name }}{% endblock %}
+
+{% block body %}
+<div class="row">
+	<div class="col-md-3"></div>
+	<div class="col-md-3"></div>
+	<div class="col-md-3"></div>
+	<div class="col-md-3">
+		{% if login %}
+			Логин: {{ login }}<br>{{ role }}<br>
+			<a href="/login/logout" class="btn btn-secondary">Выйти</a><br>
+			<a href="/mark/model/index" class="btn btn-primary">Управление</a><br>
+		{% else %}
+			<a href="/login" class="btn btn-primary">Войти</a>
+		{% endif %}
+	</div>
+</div>
+<h1>{{ controller_name }}</h1>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4"><strong>МАРКА</strong></div>
+		<div class="col-md-4"><strong>МОДЕЛЬ</strong></div>
+		<div class="col-md-4"><strong>Положение руля</strong></div>
+	</div>
+	{% for model in models %}
+		<div class="row">
+			<div class="col-md-4">
+				{% if model.fMark %}
+					{{ model.fMark.name }}
+				{% endif %}
+			</div>
+			<div class="col-md-4">{{ model.name }}</div>
+			<div class="col-md-4">
+				{% if model.getIsLeftDrive() %}
+					Левый руль
+				{% else %}
+					Правый руль
+				{% endif %}
+			</div>
+		</div>
+	{% endfor %}
+</div>
+{% endblock %}
